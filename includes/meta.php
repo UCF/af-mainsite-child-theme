@@ -3,7 +3,6 @@
  * Includes functions that handle registration/enqueuing of meta tags, styles,
  * and scripts in the document head and footer.
  **/
-namespace AFMainSite\Theme\Includes\Meta;
 
 
 /**
