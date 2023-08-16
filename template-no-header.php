@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Full Width
+ * Template Name: Breadcrumbs
  * Template Post Type: page, post
  */
 ?>
