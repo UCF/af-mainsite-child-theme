@@ -2,6 +2,7 @@
 /**
  * Handle all theme configuration here
  **/
+//namespace AFMainSite\Theme\Includes\Config;
 
 
 define( 'AFMAINSITE_THEME_URL', get_stylesheet_directory_uri() );
