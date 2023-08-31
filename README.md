@@ -14,6 +14,10 @@
 
 Head over to the [AF Mainsite Child Theme wiki](https://github.com/UCF/af-mainsite-child-theme/wiki) for detailed information about this theme, installation instructions, and more.
 
+### People post type
+Custom post type for people has been added, along with a shortcode to display. Currently has two layouts, leadership and team.
+* [af_people category="category-name" layout="leadership/team"]
+
 -----
 
 ## Development
