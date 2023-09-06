@@ -137,7 +137,9 @@ function people_by_category_shortcode($atts) {
 			$query = new WP_Query($args);
 
 			if ($query->have_posts()) {
-				$output .= '<div class="container pb-3"><div class="row"><h3 class="heading-underline pb-2">' . $category->name . '</h3>';
+				$output .= '<div class="container pb-3">';
+				$output .= '<h3 class="heading-underline pb-2">' . $category->name . '</h3>'; // Moved outside of the row
+				$output .= '<div class="row">';
 
 				while ($query->have_posts()) {
 					$query->the_post();
@@ -151,7 +153,7 @@ function people_by_category_shortcode($atts) {
 
 					$output .= '
                     <div class="col col-4 col-md-3">
-                        <img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" />
+                        <img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail" />
                         <h4>' . esc_html($team_name) . '</h4>
                         <p class="pb-3">' . esc_html($team_title) . '</p>
                         <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($team_email) . '">' . esc_html($team_email) . '</a><br>
