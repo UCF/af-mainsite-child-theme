@@ -155,7 +155,7 @@ function people_by_category_shortcode($atts) {
 					$phone_block = (!empty($team_phone)) ? '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($team_phone) . '">' . esc_html($team_phone) . '</a>' : '';
 
 					$output .= '
-						<div class="col col-4 col-md-3">
+						<div class="col col-4 col-md-3 p-2 pb-3">
 							<img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail" />
 							<h4 class="mt-2 h6">' . esc_html($team_name) . '</h4>
 							<p class="pb-1 mb-0">' . esc_html($team_title) . '</p>
