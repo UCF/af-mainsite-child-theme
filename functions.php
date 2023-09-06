@@ -166,3 +166,61 @@ function people_by_category_shortcode( $atts ) {
 	return $output;
 }
 add_shortcode( 'af_people', 'people_by_category_shortcode' );
+
+function team_layout_shortcode() {
+	// Get the list of categories excluding 'leadership-team' and 'uncategorized'
+	$categories = get_categories(array(
+		'orderby' => 'name',
+		'order'   => 'ASC',
+		'exclude' => array( get_cat_ID('leadership-team'), get_cat_ID('uncategorized') )
+	));
+
+	$output = '';
+
+	foreach ($categories as $category) {
+		// Fetch posts in the current category, sorted by 'team_order' and then by 'date'
+		$args = array(
+			'post_type' => 'people',
+			'posts_per_page' => -1,
+			'cat' => $category->term_id,
+			'meta_key' => 'team_order',
+			'orderby' => array(
+				'meta_value_num' => 'ASC',
+				'date' => 'DESC'
+			)
+		);
+
+		$query = new WP_Query($args);
+
+		if ($query->have_posts()) {
+			$output .= '<div class="container pb-3"><div class="row"><h3 class="heading-underline pb-2">' . $category->name . '</h3>';
+
+			while ($query->have_posts()) {
+				$query->the_post();
+
+				// Fetch ACF fields using the specified prefix
+				$team_image = get_field('image');
+				$team_name = get_field('name');
+				$team_title = get_field('title');
+				$team_email = get_field('email');
+				$team_phone = get_field('phone_number');
+
+				$output .= '
+                <div class="col col-4 col-md-3">
+                    <img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" />
+                    <h4>' . esc_html($team_name) . '</h4>
+                    <p class="pb-3">' . esc_html($team_title) . '</p>
+                    <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($team_email) . '">' . esc_html($team_email) . '</a><br>
+                    <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($team_phone) . '">' . esc_html($team_phone) . '</a>
+                </div>';
+			}
+
+			wp_reset_postdata();
+			$output .= '</div></div>';
+		}
+	}
+
+	return $output;
+}
+
+add_shortcode('af_team', 'team_layout_shortcode');
