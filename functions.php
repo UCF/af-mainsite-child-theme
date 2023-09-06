@@ -107,73 +107,111 @@ add_action('init', 'add_category_meta_boxes');
 
 //Add shortcode to fetch and display people post types.
 //Ex usage - [af_people layout="leadership"]
-function people_by_category_shortcode( $atts ) {
-	$atts = shortcode_atts( array(
+function people_by_category_shortcode($atts) {
+	$atts = shortcode_atts(array(
 		'category' => '',
 		'layout' => 'leadership'
-	), $atts );
+	), $atts);
 
-	$args = array(
-		'post_type' => 'people',
-		'posts_per_page' => -1,
-		'meta_key' => 'leadership_order',
-		'orderby' => array(
-			'meta_value_num' => 'ASC',
-			'date' => 'DESC'
-		)
-	);
-
-	if( !empty( $atts['category'] ) ) {
-		$args['category_name'] = $atts['category'];
-	}
-
-	$query = new WP_Query( $args );
 	$output = '<div class="people-posts">';
 
-	if( $query->have_posts() ) {
-		while( $query->have_posts() ) {
-			$query->the_post();
-			$post_id = get_the_ID();
+	if ($atts['layout'] === 'team') {
+		$categories = get_categories(array(
+			'orderby' => 'name',
+			'order' => 'ASC',
+			'exclude' => array(get_cat_ID('leadership-team'), get_cat_ID('uncategorized'))
+		));
 
-			// Assume ACF fields are used
-			$person_name = get_field( 'name', $post_id );
-			$person_title = get_field( 'title', $post_id );
-			$person_email = get_field( 'email', $post_id );
-			$person_phone = get_field( 'phone_number', $post_id );
+		foreach ($categories as $category) {
+			$args = array(
+				'post_type' => 'people',
+				'posts_per_page' => -1,
+				'cat' => $category->term_id,
+				'meta_key' => 'team_order',
+				'orderby' => array(
+					'meta_value_num' => 'ASC',
+					'date' => 'DESC'
+				)
+			);
 
-			if( $atts['layout'] === 'leadership' ) {
+			$query = new WP_Query($args);
+
+			if ($query->have_posts()) {
+				$output .= '<div class="container pb-3"><div class="row"><h3 class="heading-underline pb-2">' . $category->name . '</h3>';
+
+				while ($query->have_posts()) {
+					$query->the_post();
+
+					// Fetch ACF fields using the specified prefix
+					$team_image = get_field('image');
+					$team_name = get_field('name');
+					$team_title = get_field('title');
+					$team_email = get_field('email');
+					$team_phone = get_field('phone_number');
+
+					$output .= '
+                    <div class="col col-4 col-md-3">
+                        <img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" />
+                        <h4>' . esc_html($team_name) . '</h4>
+                        <p class="pb-3">' . esc_html($team_title) . '</p>
+                        <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($team_email) . '">' . esc_html($team_email) . '</a><br>
+                        <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($team_phone) . '">' . esc_html($team_phone) . '</a>
+                    </div>';
+				}
+
+				$output .= '</div></div>';
+			}
+
+			wp_reset_postdata();
+		}
+	} else {
+		$args = array(
+			'post_type' => 'people',
+			'posts_per_page' => -1,
+			'meta_key' => 'leadership_order',
+			'orderby' => array(
+				'meta_value_num' => 'ASC',
+				'date' => 'DESC'
+			)
+		);
+
+		if (!empty($atts['category'])) {
+			$args['category_name'] = $atts['category'];
+		}
+
+		$query = new WP_Query($args);
+
+		if ($query->have_posts()) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				$post_id = get_the_ID();
+
+				// Assume ACF fields are used
+				$person_name = get_field('name', $post_id);
+				$person_title = get_field('title', $post_id);
+				$person_email = get_field('email', $post_id);
+				$person_phone = get_field('phone_number', $post_id);
+
 				$output .= '
                 <div class="container pb-5">
                     <div class="row">
-                        <div class="col col-4 col-md-3">' . get_the_post_thumbnail( $post_id ) . '</div>
+                        <div class="col col-4 col-md-3">' . get_the_post_thumbnail($post_id) . '</div>
                         <div class="col col-8 col-md-9">
-                            <h3>' . esc_html( $person_name ) . '</h3>
-                            <p class="pb-3">' . esc_html( $person_title ) . '</p>
-                            <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr( $person_email ) . '">' . esc_html( $person_email ) . '</a><br>
-                            <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr( $person_phone ) . '">' . esc_html( $person_phone ) . '</a><br>
-                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="' . get_permalink( $post_id ) . '">Bio</a>
+                            <h3>' . esc_html($person_name) . '</h3>
+                            <p class="pb-3">' . esc_html($person_title) . '</p>
+                            <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($person_email) . '">' . esc_html($person_email) . '</a><br>
+                            <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($person_phone) . '">' . esc_html($person_phone) . '</a><br>
+                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="' . get_permalink($post_id) . '">Bio</a>
                         </div>
                     </div>
                 </div>';
-			} else if ($atts['layout'] === 'team') {
-				// The team layout code. (Previously inside team_layout_shortcode)
-				$categories = get_categories(array(
-					'orderby' => 'name',
-					'order'   => 'ASC',
-					'exclude' => array( get_cat_ID('leadership-team'), get_cat_ID('uncategorized') )
-				));
-
-				foreach ($categories as $category) {
-					$output .= '<div class="container pb-3"><div class="row"><h3 class="heading-underline pb-2">' . $category->name . '</h3>';
-
-					//... [The rest of the team layout code]
-				}
 			}
+			wp_reset_postdata();
 		}
-		wp_reset_postdata();
 	}
-	$output .= '</div>';
 
+	$output .= '</div>';
 	return $output;
 }
-add_shortcode( 'af_people', 'people_by_category_shortcode' );
+
+add_shortcode('af_people', 'people_by_category_shortcode');
