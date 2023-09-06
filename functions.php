@@ -137,7 +137,7 @@ function people_by_category_shortcode($atts) {
 			$query = new WP_Query($args);
 
 			if ($query->have_posts()) {
-				$output .= '<div class="container pb-3">';
+				$output .= '<div class="container pb-5">';
 				$output .= '<h3 class="heading-underline pb-2">' . $category->name . '</h3>'; // Moved outside of the row
 				$output .= '<div class="row">';
 
