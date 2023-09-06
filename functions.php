@@ -151,14 +151,17 @@ function people_by_category_shortcode($atts) {
 					$team_email = get_field('email');
 					$team_phone = get_field('phone_number');
 
+					$email_block = (!empty($team_email)) ? '<fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($team_email) . '">' . esc_html($team_email) . '</a><br>' : '';
+					$phone_block = (!empty($team_phone)) ? '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($team_phone) . '">' . esc_html($team_phone) . '</a>' : '';
+
 					$output .= '
-                    <div class="col col-4 col-md-3">
-                        <img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail" />
-                        <h4>' . esc_html($team_name) . '</h4>
-                        <p class="pb-3">' . esc_html($team_title) . '</p>
-                        <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($team_email) . '">' . esc_html($team_email) . '</a><br>
-                        <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($team_phone) . '">' . esc_html($team_phone) . '</a>
-                    </div>';
+						<div class="col col-4 col-md-3">
+							<img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail" />
+							<h4>' . esc_html($team_name) . '</h4>
+							<p class="pb-1 mb-0">' . esc_html($team_title) . '</p>
+							' . $email_block . '
+							' . $phone_block . '
+						</div>';
 				}
 
 				$output .= '</div></div>';
