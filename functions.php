@@ -115,7 +115,12 @@ function people_by_category_shortcode( $atts ) {
 
 	$args = array(
 		'post_type' => 'people',
-		'posts_per_page' => -1,  // display all posts
+		'posts_per_page' => -1,
+		'meta_key' => 'leadership_order',
+		'orderby' => array(
+			'meta_value_num' => 'ASC',
+			'date' => 'DESC'
+		)
 	);
 
 	if( !empty( $atts['category'] ) ) {
@@ -146,7 +151,7 @@ function people_by_category_shortcode( $atts ) {
                             <p class="pb-3">' . esc_html( $person_title ) . '</p>
                             <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr( $person_email ) . '">' . esc_html( $person_email ) . '</a><br>
                             <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr( $person_phone ) . '">' . esc_html( $person_phone ) . '</a><br>
-                            <a class="btn btn-primary" data-toggle="collapse" href="' . get_the_permalink() . '">Bio</a>
+                            <a class="btn btn-primary" data-toggle="collapse" href="' . get_permalink( $post_id ) . '">Bio</a>
                         </div>
                     </div>
                 </div>';
@@ -161,4 +166,3 @@ function people_by_category_shortcode( $atts ) {
 	return $output;
 }
 add_shortcode( 'af_people', 'people_by_category_shortcode' );
-
