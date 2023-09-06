@@ -143,7 +143,7 @@ function people_by_category_shortcode( $atts ) {
 
 			if( $atts['layout'] === 'leadership' ) {
 				$output .= '
-                <div class="container">
+                <div class="container pb-3">
                     <div class="row">
                         <div class="col col-4 col-md-3">' . get_the_post_thumbnail( $post_id ) . '</div>
                         <div class="col col-8 col-md-9">
@@ -151,7 +151,7 @@ function people_by_category_shortcode( $atts ) {
                             <p class="pb-3">' . esc_html( $person_title ) . '</p>
                             <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr( $person_email ) . '">' . esc_html( $person_email ) . '</a><br>
                             <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr( $person_phone ) . '">' . esc_html( $person_phone ) . '</a><br>
-                            <a class="btn btn-primary" data-toggle="collapse" href="' . get_permalink( $post_id ) . '">Bio</a>
+                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="' . get_permalink( $post_id ) . '">Bio</a>
                         </div>
                     </div>
                 </div>';
