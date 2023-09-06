@@ -157,7 +157,7 @@ function people_by_category_shortcode($atts) {
 					$output .= '
 						<div class="col col-4 col-md-3">
 							<img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail" />
-							<h4>' . esc_html($team_name) . '</h4>
+							<h4 class="mt-2 h6">' . esc_html($team_name) . '</h4>
 							<p class="pb-1 mb-0">' . esc_html($team_title) . '</p>
 							' . $email_block . '
 							' . $phone_block . '
