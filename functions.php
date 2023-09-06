@@ -142,8 +142,20 @@ function people_by_category_shortcode( $atts ) {
 			$person_phone = get_field( 'phone_number', $post_id );
 
 			if( $atts['layout'] === 'leadership' ) {
-				$output .= //... [The leadership layout code as before]
-            } else if ($atts['layout'] === 'team') {
+				$output .= '
+                <div class="container pb-5">
+                    <div class="row">
+                        <div class="col col-4 col-md-3">' . get_the_post_thumbnail( $post_id ) . '</div>
+                        <div class="col col-8 col-md-9">
+                            <h3>' . esc_html( $person_name ) . '</h3>
+                            <p class="pb-3">' . esc_html( $person_title ) . '</p>
+                            <fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr( $person_email ) . '">' . esc_html( $person_email ) . '</a><br>
+                            <fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr( $person_phone ) . '">' . esc_html( $person_phone ) . '</a><br>
+                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="' . get_permalink( $post_id ) . '">Bio</a>
+                        </div>
+                    </div>
+                </div>';
+			} else if ($atts['layout'] === 'team') {
 				// The team layout code. (Previously inside team_layout_shortcode)
 				$categories = get_categories(array(
 					'orderby' => 'name',
