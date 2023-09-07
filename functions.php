@@ -250,7 +250,7 @@ class BS4_Nav_Walker extends Walker_Nav_Menu {
 	function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
 		$active_class = '';
 		if ( in_array( 'current-menu-item', $item->classes, true ) ) {
-			$active_class = ' active';
+			$active_class = ' active bg-primary';
 		}
 		$output .= '<li class="nav-item' . $active_class . '">';
 
@@ -261,7 +261,7 @@ class BS4_Nav_Walker extends Walker_Nav_Menu {
 			$link_classes[] = 'text-muted'; // Add text-muted to the link classes for nested links
 			$link_classes[] = 'font-size-sm'; // Add font-size-sm to the link classes for nested links
 		} else {
-			$link_classes[] = 'h6';
+			$link_classes[] = 'h6 mb-0';
 		}
 		$link_class_str = implode( ' ', $link_classes );
 
