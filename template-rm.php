@@ -17,8 +17,8 @@ the_post();
 				wp_nav_menu(array(
 					'theme_location'  => 'records-management-menu',
 					'container'       => 'nav',
-					'container_class' => 'nav flex-column mb-4',
-					'menu_class'      => 'nav-item',
+					'container_class' => 'mb-4',
+					'menu_class'      => 'nav flex-column',
 					'walker'          => new BS4_Nav_Walker(),
 				));
 				?>
