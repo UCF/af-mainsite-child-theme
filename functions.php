@@ -241,25 +241,30 @@ add_action( 'init', 'register_my_menus' );
 
 //Register walker for records management menu
 class BS4_Nav_Walker extends Walker_Nav_Menu {
-	function start_lvl(&$output, $depth = 0, $args = []) {
-		$output .= "\n<ul class=\"nav flex-column\">\n";
+	function start_lvl( &$output, $depth = 0, $args = [] ) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "\n$indent<ul class=\"nav flex-column\">\n";
 	}
 
-	function start_el(&$output, $item, $depth = 0, $args = [], $id = 0) {
+	function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
+		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 		$active_class = '';
-		if (in_array('current-menu-item', $item->classes, true)) {
+
+		if ( in_array( 'current-menu-item', $item->classes, true ) ) {
 			$active_class = ' active';
 		}
-		$output .= '<li class="nav-item' . $active_class . '">';
 
-		$link_classes = ['nav-link'];
-		if ($depth > 0) {
-			$link_classes[] = 'h6';
+		$output .= $indent . '<li class="nav-item' . $active_class . '">';
+
+		$link_classes = [ 'nav-link' ];
+
+		if ( $depth > 0 ) {
+			$link_classes[] = 'p';
 		} else {
-			$link_classes[] = 'h5';
+			$link_classes[] = 'h6';
 		}
-		$link_class_str = implode(' ', $link_classes);
 
-		$output .= '<a class="' . $link_class_str . '" href="' . $item->url . '">' . $item->title . '</a>';
+		$link_class_str = implode( ' ', $link_classes );
+		$output .= '<a class="' . esc_attr( $link_class_str ) . '" href="' . esc_attr( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
 	}
 }
