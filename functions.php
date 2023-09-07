@@ -226,3 +226,38 @@ function people_by_category_shortcode($atts) {
 }
 
 add_shortcode('af_people', 'people_by_category_shortcode');
+
+//Register records management menu
+function register_my_menus() {
+	register_nav_menus(
+		array(
+			'records-management-menu' => __( 'Records Management Menu' ),
+		)
+	);
+}
+add_action( 'init', 'register_my_menus' );
+
+//Register walker for records management menu
+class BS4_Nav_Walker extends Walker_Nav_Menu {
+	function start_lvl(&$output, $depth = 0, $args = []) {
+		$output .= "\n<ul class=\"nav flex-column\">\n";
+	}
+
+	function start_el(&$output, $item, $depth = 0, $args = [], $id = 0) {
+		$active_class = '';
+		if (in_array('current-menu-item', $item->classes, true)) {
+			$active_class = ' active';
+		}
+		$output .= '<li class="nav-item' . $active_class . '">';
+
+		$link_classes = ['nav-link'];
+		if ($depth > 0) {
+			$link_classes[] = 'h6';
+		} else {
+			$link_classes[] = 'h5';
+		}
+		$link_class_str = implode(' ', $link_classes);
+
+		$output .= '<a class="' . $link_class_str . '" href="' . $item->url . '">' . $item->title . '</a>';
+	}
+}
