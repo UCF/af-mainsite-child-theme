@@ -49,13 +49,15 @@ if ( ! function_exists( 'theme_breadcrumbs' ) ) {
 //Set default page template to breadcrumbs for new pages
 function set_default_page_template() {
 	global $post;
-	if ('page' == $post->post_type && 'auto-draft' == $post->post_status ) {
-		$default_template = locate_template( array( 'template-breadcrumbs.php' ) ); // Change 'breadcrumbs-template.php' to your template's filename
+
+	if ($post && 'page' == $post->post_type && 'auto-draft' == $post->post_status ) { //LINE 52
+		$default_template = locate_template( array( 'template-breadcrumbs.php' ) );
 		if (!empty($default_template)) {
 			update_post_meta($post->ID, '_wp_page_template', 'template-breadcrumbs.php');
 		}
 	}
 }
+
 
 add_action('admin_init', 'set_default_page_template');
 
