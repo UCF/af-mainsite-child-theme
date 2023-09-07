@@ -243,7 +243,7 @@ add_action( 'init', 'register_my_menus' );
 class BS4_Nav_Walker extends Walker_Nav_Menu {
 	function start_lvl( &$output, $depth = 0, $args = [] ) {
 		$indent = str_repeat( "\t", $depth );
-		$class_to_add = ( $depth >= 1 ) ? 'ml-3' : ''; // Add ml-3 class to nested ul elements only
+		$class_to_add = ( $depth >= 0 ) ? 'ml-3' : ''; // Add ml-3 class to nested ul elements only
 		$output .= "\n$indent<ul class=\"nav flex-column $class_to_add\">\n";
 	}
 
