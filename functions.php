@@ -259,7 +259,7 @@ class BS4_Nav_Walker extends Walker_Nav_Menu {
 		$link_classes = [ 'nav-link' ];
 
 		if ( $depth > 0 ) {
-			$link_classes[] = 'p';
+			$link_classes[] = 'p pl-3 text-muted font-size-sm';
 		} else {
 			$link_classes[] = 'h6';
 		}
