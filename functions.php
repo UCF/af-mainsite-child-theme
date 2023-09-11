@@ -91,6 +91,7 @@ function create_people_post_type() {
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => 5,
+		'menu_icon'          => 'dashicons-admin-users', // Specify the dashicon here
 		'supports'           => array( 'title', 'editor', 'thumbnail' ),
 		'taxonomies'         => array('category')
 	);
