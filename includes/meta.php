@@ -18,4 +18,4 @@ function enqueue_frontend_assets() {
 	wp_enqueue_script( 'script-child', AFMAINSITE_THEME_JS_URL . '/script.min.js', array( 'jquery', 'script' ), $theme_version, true );
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_frontend_assets', 11 );
+add_action( 'wp_enqueue_scripts', '\enqueue_frontend_assets', 11 );
