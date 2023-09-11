@@ -17,7 +17,7 @@ the_post();
 				wp_nav_menu(array(
 					'theme_location'  => 'records-management-menu',
 					'container'       => 'nav',
-					'container_class' => 'mb-4',
+					'container_class' => 'mb-1',
 					'menu_class'      => 'nav flex-column',
 					'walker'          => new BS4_Nav_Walker(),
 				));
@@ -37,7 +37,7 @@ the_post();
 				// Construct the HTML output for the RMLO section
 				$output = '
 				<div class="col col-12 p-2 pb-3">
-					<img src="' . esc_url($rmlo_image['url']) . '" alt="' . esc_attr($rmlo_image['alt']) . '" class="img-thumbnail" />
+					<img src="' . esc_url($rmlo_image['url']) . '" alt="' . esc_attr($rmlo_image['alt']) . '" class="img-thumbnail rmlo-image" />
 					<h4 class="mt-2 h6">' . esc_html($rmlo_name) . '</h4>
 					<p class="pb-1 mb-0">' . esc_html($rmlo_title) . '</p>
 					' . $email_block . '
