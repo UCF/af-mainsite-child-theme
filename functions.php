@@ -222,7 +222,7 @@ function people_by_category_shortcode($atts) {
 
 
 				// HTML structure for each person in 'leadership' layout.
-				echo '<div class="container pb-5"><div class="row"><div class="col col-4 col-md-3"';
+				echo '<div class="container pb-5"><div class="row"><div class="col col-4 col-md-3">';
 				if ($person_image) {
 					echo '<img src="' . esc_url($person_image['url']) . '" alt="' . esc_attr($person_image['alt']) . '" class="img-thumbnail" />';
 				}
