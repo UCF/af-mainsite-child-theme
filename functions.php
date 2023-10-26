@@ -214,18 +214,18 @@ function people_by_category_shortcode($atts) {
 				$post_id = get_the_ID();
 
 				// Fetch ACF fields.
-				$team_image = get_field('image', $post_id);
+				$person_image = get_field('image', $post_id);
 				$person_name = get_field('name', $post_id);
 				$person_title = get_field('title', $post_id);
 				$person_email = get_field('email', $post_id);
 				$person_phone = get_field('phone_number', $post_id);
 
-				// Create an image block if the image exists.
-				$image_block = ($team_image) ? '<div class="col col-4 col-md-3">' . get_the_post_thumbnail($post_id) . '</div>' : '';
 
 				// HTML structure for each person in 'leadership' layout.
 				echo '<div class="container pb-5"><div class="row">';
-				echo $image_block;
+				if ($person_image) {
+					echo '<img src="' . esc_url($person_image['url']) . '" alt="' . esc_attr($person_image['alt']) . '" class="img-thumbnail" />';
+				}
 				echo '<div class="col col-8 col-md-9">';
 				echo '<h3>' . esc_html($person_name) . '</h3>';
 				echo '<p class="pb-3">' . esc_html($person_title) . '</p>';
