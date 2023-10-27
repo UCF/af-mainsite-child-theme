@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Direct Support Organizations
+ * Template Name: Units
  * Template Post Type: page, post
  */
 ?>
