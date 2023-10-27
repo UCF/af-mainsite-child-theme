@@ -25,18 +25,6 @@ the_post();
 				echo '<p>Menu "financial-information-menu" not defined. Please set it in wp-admin.</p>';
 			}
 			?>
-			<div class="col-12 col-md-3 d-none d-md-block"> <!-- Visible on md viewports and above -->
-				<!-- Sidebar with Navigation Menu for md viewports and above -->
-				<?php
-				wp_nav_menu(array(
-					'theme_location'  => 'financial-information-menu',
-					'container'       => 'nav',
-					'container_class' => 'mb-1',
-					'menu_class'      => 'nav flex-column',
-					'walker'          => new BS4_Nav_Walker(),
-				));
-				?>
-			</div>
 
 			<!-- Main Content Area -->
 			<div class="col-12 col-md-9">
