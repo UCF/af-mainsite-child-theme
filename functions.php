@@ -50,7 +50,7 @@ if ( ! function_exists( 'theme_breadcrumbs' ) ) {
 function set_default_page_template() {
 	global $post;
 
-	if ($post && 'page' == $post->post_type && 'auto-draft' == $post->post_status ) { //LINE 52
+	if ($post && 'page' == $post->post_type && 'auto-draft' == $post->post_status ) {
 		$default_template = locate_template( array( 'template-breadcrumbs.php' ) );
 		if (!empty($default_template)) {
 			update_post_meta($post->ID, '_wp_page_template', 'template-breadcrumbs.php');
