@@ -254,7 +254,7 @@ function register_my_menus() {
 	register_nav_menus(
 		array(
 			'records-management-menu' => __( 'Records Management Menu' ),
-			'financial-information-menu' => __( 'Financial Resources Menu' ),
+			'financial-information-menu' => __( 'Financial Information Menu' ),
 		)
 	);
 }

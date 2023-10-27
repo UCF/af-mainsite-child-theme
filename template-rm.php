@@ -33,13 +33,18 @@ the_post();
 			<div class="col-12 col-md-3 d-none d-md-block"> <!-- Visible on md viewports and above -->
 				<!-- Sidebar with Navigation Menu for md viewports and above -->
 				<?php
-				wp_nav_menu(array(
-					'theme_location'  => 'records-management-menu',
-					'container'       => 'nav',
-					'container_class' => 'mb-1',
-					'menu_class'      => 'nav flex-column',
-					'walker'          => new BS4_Nav_Walker(),
-				));
+				if (has_nav_menu('records-management-menu')) { // Check if the menu location exists
+					$walker_menu = class_exists('BS4_Nav_Walker') ? new BS4_Nav_Walker() : '';
+					wp_nav_menu(array(
+						'theme_location'  => 'records-management-menu',
+						'container'       => 'nav',
+						'container_class' => 'mb-1',
+						'menu_class'      => 'nav flex-column',
+						'walker'          => $walker_menu,
+					));
+				} else {
+					echo '<p>Menu "records-management-menu" not defined. Please set it in wp-admin.</p>';
+				}
 				?>
 				<?php
 				// Fetch ACF fields from the 'RMLO' options page
@@ -49,22 +54,26 @@ the_post();
 				$rmlo_email = get_field('email', 'option');
 				$rmlo_phone = get_field('phone', 'option');
 
-				// Construct email and phone blocks, checking if they are not empty
-				$email_block = (!empty($rmlo_email)) ? '<fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($rmlo_email) . '">' . esc_html($rmlo_email) . '</a><br>' : '';
-				$phone_block = (!empty($rmlo_phone)) ? '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($rmlo_phone) . '">' . esc_html($rmlo_phone) . '</a>' : '';
+				if (!empty($rmlo_image) && !empty($rmlo_name) && !empty($rmlo_title)) {
+					// Construct email and phone blocks
+					$email_block = (!empty($rmlo_email)) ? '<fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($rmlo_email) . '">' . esc_html($rmlo_email) . '</a><br>' : '';
+					$phone_block = (!empty($rmlo_phone)) ? '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($rmlo_phone) . '">' . esc_html($rmlo_phone) . '</a>' : '';
 
-				// Construct the HTML output for the RMLO section
-				$output = '
-				<div class="col col-12 p-2 pb-3">
-					<img src="' . esc_url($rmlo_image['url']) . '" alt="' . esc_attr($rmlo_image['alt']) . '" class="img-thumbnail rmlo-image" />
-					<h4 class="mt-2 h6">' . esc_html($rmlo_name) . '</h4>
-					<p class="pb-1 mb-0">' . esc_html($rmlo_title) . '</p>
-					' . $email_block . '
-					' . $phone_block . '
-				</div>';
+					// Construct the HTML output for the RMLO section
+					$output = '
+					<div class="col col-12 p-2 pb-3">
+						<img src="' . esc_url($rmlo_image['url']) . '" alt="' . esc_attr($rmlo_image['alt']) . '" class="img-thumbnail rmlo-image" />
+						<h4 class="mt-2 h6">' . esc_html($rmlo_name) . '</h4>
+						<p class="pb-1 mb-0">' . esc_html($rmlo_title) . '</p>
+						' . $email_block . '
+						' . $phone_block . '
+					</div>';
 
-				// Echo the output to display it in your template
-				echo $output;
+					// Echo the output to display it in your template
+					echo $output;
+				} else {
+					echo '<p>Required ACF fields for RMLO section are missing. Please set them in wp-admin.</p>';
+				}
 				?>
 			</div>
 
