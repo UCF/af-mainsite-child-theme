@@ -173,7 +173,7 @@ function people_by_category_shortcode($atts) {
 					// HTML structure for each person.
 					echo '<div class="col col-4 col-md-3 p-2 pb-3">';
 					if ($team_image) {
-						echo '<img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail" />';
+						echo '<img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail rounded-circle" />';
 					}
 					echo '<h4 class="mt-2 h6">' . esc_html($team_name) . '</h4>';
 					echo '<p class="pb-1 mb-0">' . esc_html($team_title) . '</p>';
@@ -227,7 +227,7 @@ function people_by_category_shortcode($atts) {
 				// HTML structure for each person in 'leadership' layout.
 				echo '<div class="container pb-5"><div class="row"><div class="col col-4 col-md-3">';
 				if ($person_image) {
-					echo '<img src="' . esc_url($person_image['url']) . '" alt="' . esc_attr($person_image['alt']) . '" class="img-thumbnail" />';
+					echo '<img src="' . esc_url($person_image['url']) . '" alt="' . esc_attr($person_image['alt']) . '" class="img-thumbnail rounded-circle" />';
 				}
 				echo '</div>';
 				echo '<div class="col col-8 col-md-9">';
