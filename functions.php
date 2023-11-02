@@ -171,7 +171,7 @@ function people_by_category_shortcode($atts) {
 					$phone_block = (!empty($team_phone)) ? '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($team_phone) . '">' . esc_html($team_phone) . '</a>' : '';
 
 					// HTML structure for each person.
-					echo '<div class="col col-4 col-md-3 p-2 pb-3">';
+					echo '<div class="col col-12 col-md-3 p-2 pb-3">';
 					if ($team_image) {
 						echo '<img src="' . esc_url($team_image['url']) . '" alt="' . esc_attr($team_image['alt']) . '" class="img-thumbnail rounded-circle border-0" />';
 					}
