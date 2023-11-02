@@ -164,7 +164,7 @@ function people_by_category_shortcode($atts) {
 					$team_name = get_field('name');
 					$team_title = get_field('title');
 					$team_email = get_field('email');
-					$team_phone = get_field('phone_number');
+					$team_phone = get_field('phone');
 
 					// Email and phone blocks, conditional on their presence.
 					$email_block = (!empty($team_email)) ? '<fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($team_email) . '">' . esc_html($team_email) . '</a><br>' : '';
@@ -218,7 +218,7 @@ function people_by_category_shortcode($atts) {
 				$person_name = get_field('name', $post_id);
 				$person_title = get_field('title', $post_id);
 				$person_email = get_field('email', $post_id);
-				$person_phone = get_field('phone_number', $post_id);
+				$person_phone = get_field('phone', $post_id);
 				$person_bio = get_field('leadership_bio', $post_id);
 
 				// Unique ID for the collapse element
