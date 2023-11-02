@@ -241,7 +241,7 @@ function people_by_category_shortcode($atts) {
 
 				// Collapsible container for the bio
 				echo '<div class="collapse" id="' . $collapse_id . '">';
-				echo '<div class="card card-body p-2">' . esc_html($person_bio) . '</div>';
+				echo '<div class="card card-body p-2 border-0">' . esc_html($person_bio) . '</div>';
 				echo '</div>'; // Close the collapse container
 
 				echo '</div></div></div>';  // Close divs for person content and row/container.
