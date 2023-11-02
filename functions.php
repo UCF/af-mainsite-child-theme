@@ -219,7 +219,10 @@ function people_by_category_shortcode($atts) {
 				$person_title = get_field('title', $post_id);
 				$person_email = get_field('email', $post_id);
 				$person_phone = get_field('phone_number', $post_id);
+				$person_bio = get_field('leadership_bio', $post_id);
 
+				// Unique ID for the collapse element
+				$collapse_id = 'person_bio_' . $post_id;
 
 				// HTML structure for each person in 'leadership' layout.
 				echo '<div class="container pb-5"><div class="row"><div class="col col-4 col-md-3">';
@@ -232,7 +235,15 @@ function people_by_category_shortcode($atts) {
 				echo '<p class="pb-3">' . esc_html($person_title) . '</p>';
 				echo '<fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($person_email) . '">' . esc_html($person_email) . '</a><br>';
 				echo '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($person_phone) . '">' . esc_html($person_phone) . '</a><br>';
-				echo '<a class="btn btn-primary btn-sm" data-toggle="collapse" href="' . get_permalink($post_id) . '">Bio</a>';
+
+				// Button to toggle the bio
+				echo '<a class="btn btn-primary btn-sm" data-toggle="collapse" href="#' . $collapse_id . '" role="button" aria-expanded="false" aria-controls="' . $collapse_id . '">Bio</a>';
+
+				// Collapsible container for the bio
+				echo '<div class="collapse" id="' . $collapse_id . '">';
+				echo '<div class="card card-body">' . esc_html($person_bio) . '</div>';
+				echo '</div>'; // Close the collapse container
+
 				echo '</div></div></div>';  // Close divs for person content and row/container.
 
 				wp_reset_postdata();  // Reset the query.
