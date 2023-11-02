@@ -232,7 +232,7 @@ function people_by_category_shortcode($atts) {
 				echo '</div>';
 				echo '<div class="col col-8 col-md-9">';
 				echo '<h3>' . esc_html($person_name) . '</h3>';
-				echo '<p class="pb-3">' . esc_html($person_title) . '</p>';
+				echo '<p>' . esc_html($person_title) . '</p>';
 				echo '<fa class="fa fa-envelope mr-2"></fa> <a href="mailto:' . esc_attr($person_email) . '">' . esc_html($person_email) . '</a><br>';
 				echo '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($person_phone) . '">' . esc_html($person_phone) . '</a><br>';
 
