@@ -237,7 +237,7 @@ function people_by_category_shortcode($atts) {
 				echo '<fa class="fa fa-phone mr-2"></fa> <a href="tel:' . esc_attr($person_phone) . '">' . esc_html($person_phone) . '</a><br>';
 
 				// Button to toggle the bio
-				echo '<a class="btn btn-primary btn-sm" data-toggle="collapse" href="#' . $collapse_id . '" role="button" aria-expanded="false" aria-controls="' . $collapse_id . '">Bio</a>';
+				echo '<a class="btn btn-primary btn-sm mt-3" data-toggle="collapse" href="#' . $collapse_id . '" role="button" aria-expanded="false" aria-controls="' . $collapse_id . '">Bio</a>';
 
 				// Collapsible container for the bio
 				echo '<div class="collapse" id="' . $collapse_id . '">';
